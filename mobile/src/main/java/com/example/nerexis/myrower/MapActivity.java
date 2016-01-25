@@ -11,6 +11,8 @@ public class MapActivity extends AppCompatActivity {
 
     Button reserveButton;
     Button logoutButton;
+    Button settingsButton;
+    Button historyButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +37,32 @@ public class MapActivity extends AppCompatActivity {
                 logoutButton_click();
             }
         });
+
+        settingsButton = (Button) findViewById(R.id.settingsButton);
+
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                settingsButton_click();
+            }
+        });
+
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                settingsButton_click();
+            }
+        });
+
+        historyButton = (Button) findViewById(R.id.historyButton);
+
+        historyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                historyButton_click();
+            }
+        });
     }
     private void logoutButton_click()
     {
@@ -45,6 +73,16 @@ public class MapActivity extends AppCompatActivity {
     {
         Intent reserveIntent = new Intent(this,ReserveActivity.class);
         startActivity(reserveIntent);
+    }
+    private void settingsButton_click()
+    {
+        Intent settingsIntent = new Intent(this,SettingsActivity.class);
+        startActivity(settingsIntent);
+    }
+    private void historyButton_click()
+    {
+        Intent historyIntent = new Intent(this,HistoryActivity.class);
+        startActivity(historyIntent);
     }
     public void onBackPressed()
     {

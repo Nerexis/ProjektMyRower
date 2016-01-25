@@ -12,7 +12,6 @@ import android.widget.Button;
 public class ReserveActivity extends AppCompatActivity {
 
     Button cancelButton;
-    Button settingsButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,20 +27,8 @@ public class ReserveActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                settingsButton_click();
-            }
-        });
-
-
+        
     }
-    private void settingsButton_click()
-    {
-        Intent settingsIntent = new Intent(this,SettingsActivity.class);
-        startActivity(settingsIntent);
-    }
+
 
 }

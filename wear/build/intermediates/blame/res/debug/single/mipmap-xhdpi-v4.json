@@ -2,5 +2,9 @@
     {
         "merged": "C:\\Users\\Nerexis\\AndroidStudioProjects\\MyRower\\wear\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\ic_launcher.png",
         "source": "C:\\Users\\Nerexis\\AndroidStudioProjects\\MyRower\\wear\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Nerexis\\AndroidStudioProjects\\ProjektMyRower\\wear\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\ic_launcher.png",
+        "source": "C:\\Users\\Nerexis\\AndroidStudioProjects\\ProjektMyRower\\wear\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
     }
 ]
