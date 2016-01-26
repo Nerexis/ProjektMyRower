@@ -9,6 +9,7 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.example.nerexis.myrower.NetworkPackets.LoginReply;
 import com.example.nerexis.myrower.NetworkPackets.LoginRequest;
+import com.example.nerexis.myrower.NetworkPackets.ReserveRequest;
 
 import java.io.IOException;
 
@@ -31,6 +32,8 @@ public class NetworkClient {
 
         kryo.register(LoginRequest.class);
         kryo.register(LoginReply.class);
+        kryo.register(ReserveRequest.class);
+
         client.addListener(new Listener() {
             @Override
             public void received (Connection connection, Object object) {
@@ -46,6 +49,7 @@ public class NetworkClient {
                                     LoginActivity.currentInstance.connectionStateLabel.setText("Zalogowano");
                                     LoginActivity.currentInstance.setResult(1);
                                     LoginActivity.currentInstance.finish();
+
                                 } else
                                 {
                                     LoginActivity.currentInstance.connectionStateLabel.setText("Błędny login/hasło");
@@ -116,6 +120,31 @@ public class NetworkClient {
         }).start();
 
     }
+    public void SendReserveRequest(final String from, final String to, final String time, final String date)
+    {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("Network", "Reserve request ");
+                ReserveRequest request = new ReserveRequest();
+                request.userId = loginData.id;
+                request.from =from;
+                request.to = to;
+                request.time = time;
+                request.date = date;
 
+                client.sendTCP(request);
+
+                ReserveActivity.currentInstance.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ReserveActivity.currentInstance.finish();
+                    }
+                });
+
+            }
+        }).start();
+
+    }
 
 }

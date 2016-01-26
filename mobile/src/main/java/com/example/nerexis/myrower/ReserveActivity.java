@@ -14,6 +14,8 @@ public class ReserveActivity extends AppCompatActivity {
 
     TextView fromData, toData, timeData, dateData;
 
+    public static ReserveActivity currentInstance;
+    Button acceptButton;
     Button cancelButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,8 @@ public class ReserveActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reserve);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        currentInstance = this;
 
         cancelButton = (Button) findViewById(R.id.cancelButton);
 
@@ -30,6 +34,11 @@ public class ReserveActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        acceptButton = (Button) findViewById(R.id.acceptButton);
+
+
+
 
         fromData = (TextView) findViewById(R.id.fromData);
         toData = (TextView) findViewById(R.id.toData);
@@ -41,6 +50,18 @@ public class ReserveActivity extends AppCompatActivity {
         toData.setText(getIntent().getStringExtra("to"));
         timeData.setText(getIntent().getStringExtra("time"));
         dateData.setText(getIntent().getStringExtra("date"));
+
+        acceptButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NetworkClient.currentNetworkClient.SendReserveRequest(
+                        fromData.getText().toString(),
+                        toData.getText().toString(),
+                        timeData.getText().toString(),
+                        dateData.getText().toString()
+                );
+            }
+        });
 
     }
 
