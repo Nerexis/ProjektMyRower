@@ -8,8 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class ReserveActivity extends AppCompatActivity {
+
+    TextView fromData, toData, timeData, dateData;
 
     Button cancelButton;
     @Override
@@ -27,7 +30,18 @@ public class ReserveActivity extends AppCompatActivity {
                 finish();
             }
         });
-        
+
+        fromData = (TextView) findViewById(R.id.fromData);
+        toData = (TextView) findViewById(R.id.toData);
+        timeData = (TextView) findViewById(R.id.timeData);
+        dateData = (TextView) findViewById(R.id.dateData);
+
+
+        fromData.setText(getIntent().getStringExtra("from"));
+        toData.setText(getIntent().getStringExtra("to"));
+        timeData.setText(getIntent().getStringExtra("time"));
+        dateData.setText(getIntent().getStringExtra("date"));
+
     }
 
 

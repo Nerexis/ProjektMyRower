@@ -5,6 +5,9 @@ import android.util.Log;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Client;
+import com.esotericsoftware.kryonet.Connection;
+import com.esotericsoftware.kryonet.Listener;
+import com.example.nerexis.myrower.NetworkPackets.LoginReply;
 import com.example.nerexis.myrower.NetworkPackets.LoginRequest;
 
 import java.io.IOException;
@@ -17,6 +20,9 @@ public class NetworkClient {
     public LoginActivity currentLoginActivity;
     Kryo kryo;
     public static NetworkClient currentNetworkClient;
+
+    private LoginReply loginData;
+
     public  NetworkClient()
     {
         currentNetworkClient = this;
@@ -24,6 +30,36 @@ public class NetworkClient {
         kryo = client.getKryo();
 
         kryo.register(LoginRequest.class);
+        kryo.register(LoginReply.class);
+        client.addListener(new Listener() {
+            @Override
+            public void received (Connection connection, Object object) {
+
+                if(object instanceof LoginReply)
+                {
+                    LoginReply userData = (LoginReply) object;
+                    loginData = userData;
+                        LoginActivity.currentInstance.connectionStateLabel.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(loginData.id!=0) {
+                                    LoginActivity.currentInstance.connectionStateLabel.setText("Zalogowano");
+                                    LoginActivity.currentInstance.setResult(1);
+                                    LoginActivity.currentInstance.finish();
+                                } else
+                                {
+                                    LoginActivity.currentInstance.connectionStateLabel.setText("Błędny login/hasło");
+                                    LoginActivity.currentInstance.loginTextBox.setText("");
+                                    LoginActivity.currentInstance.passwordTextBox.setText("");
+                                }
+                            }
+                        });
+
+                }
+
+            }
+        });
+
 
         new Thread(client).start();
 
