@@ -8,16 +8,24 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.esotericsoftware.kryonet.Client;
+
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
 
-
     Intent loginActivityIntent;
+
+    NetworkClient networkClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        networkClient = new NetworkClient();
 
         loginActivityIntent = new Intent(this, LoginActivity.class);
 

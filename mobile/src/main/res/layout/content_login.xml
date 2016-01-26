@@ -86,6 +86,14 @@
                 android:layout_gravity="center_horizontal"
                 android:clickable="true" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Brak połączenia"
+                android:id="@+id/connectionStateLabel"
+                android:layout_gravity="center_horizontal" />
+
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
